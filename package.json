@@ -1,0 +1,20 @@
+{
+  "name": "alpine-js-examples",
+  "version": "1.0.0",
+  "description": "Collections of alpine.js examples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel src/pages/index.html",
+    "build:tailwindcss": "npx tailwindcss build src/assets/css/tailwind.css -o src/assets/css/style.css"
+  },
+  "keywords": [
+    "alpine.js"
+  ],
+  "author": "tmy",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4",
+    "tailwindcss": "^1.4.6"
+  }
+}
