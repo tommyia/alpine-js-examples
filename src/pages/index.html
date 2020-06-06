@@ -6,29 +6,49 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <title>Alpine.js Example</title>
 
-  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.3.5/dist/alpine.min.js" defer></script>
 </head>
-<body>
+<body class="relative">
+  <div class="absolute flex items-center bg-gray-200 py-3 px-2 space-x-4">
+    <a href="./index.html" class="text-blue-500 hover:text-blue-600">Validation</a>
+    <a href="./alert.html" class="text-blue-500 hover:text-blue-600">Alert</a>
+    <a href="./dataTable.html" class="text-blue-500 hover:text-blue-600">Data Table</a>
+  </div>
   <div class="bg-gray-200 h-screen">
     <div class="container mx-auto w-full h-full">
       <div class="max-w-screen-sm mx-auto w-full h-full flex flex-col items-center justify-center">
         <div class="bg-white p-5 shadow-md w-full">
           <h1 class="text-gray-900 mb-8">Form Validation</h1>
-          <form class="flex flex-col space-y-4">
+          <form
+            method="POST"
+            x-data="validateForm()"
+            x-init="
+              $watch('fullname', value => { validate('fullname') })
+              $watch('email', value => { validate('email') })
+              $watch('password', value => { validate('password') })
+            "
+            class="flex flex-col space-y-4"
+          >
             <div class="flex flex-col space-y-2">
               <label for="name">Full Name</label>
-              <input type="text" class="px-2 py-1 border rounded-md">
+              <input type="text" x-model="fullname" class="px-2 py-1 border rounded-md focus:outline-none focus:border-blue-400" placeholder="Enter your full name...">
               <span class="text-sm italic text-red-500">
-                Error occured
+                <div x-text="validation.fullname.message"></div>
               </span>
             </div>
             <div class="flex flex-col space-y-2">
-              <label for="name">Email</label>
-              <input type="text" class="px-2 py-1 border rounded-md">
+              <label for="email">Email</label>
+              <input type="email" x-model="email" class="px-2 py-1 border rounded-md focus:outline-none focus:border-blue-400" placeholder="Enter your email address...">
+              <span class="text-sm italic text-red-500">
+                <div x-text="validation.email.message"></div>
+              </span>
             </div>
             <div class="flex flex-col space-y-2">
-              <label for="name">Password</label>
-              <input type="text" class="px-2 py-1 border rounded-md">
+              <label for="password">Password</label>
+              <input type="password" x-model="password" class="px-2 py-1 border rounded-md focus:outline-none focus:border-blue-400" placeholder="Enter your password...">
+              <span class="text-sm italic text-red-500">
+                <div x-text="validation.password.message"></div>
+              </span>
             </div>
             <div class="flex flex-row-reverse">
               <button class="px-2 py-1 uppercase border bg-gray-200 text-gray-900">Submit</button>
